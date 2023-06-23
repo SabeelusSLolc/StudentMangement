@@ -2,7 +2,6 @@ package com.example.model;
 
 import java.util.Set;
 
-import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

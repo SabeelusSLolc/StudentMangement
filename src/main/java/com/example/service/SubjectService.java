@@ -6,17 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.dao.CourseRepository;
 import com.example.dao.SubjectRepository;
-import com.example.model.Course;
 import com.example.model.Subject;
 
 @Service
 public class SubjectService {
 	@Autowired
 	private SubjectRepository subjectRepository;
-	@Autowired
-	private CourseRepository courseRepository;
+
 	public Subject createSubject(Subject subject) {
 		return subjectRepository.save(subject);
 	}
