@@ -7,17 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.CourseRepository;
-import com.example.dao.SubjectRepository;
 import com.example.model.Course;
-import com.example.model.Subject;
 
 @Service
 public class CourseService {
 	
 	@Autowired
 	private CourseRepository courseRepository;
-	@Autowired
-	private SubjectRepository subjectRepository;
 	
 	public Course CreateCourse(Course course) {
 		return courseRepository.save(course);
@@ -59,47 +55,6 @@ public class CourseService {
 	
 	public String deleteCourseById(int id) {
 		courseRepository.deleteById(id);
-		return "Successfully Deleted";
-	}
-	
-	//assign subjects to the course
-	public Course assignSubjectToCourse (int courseId, int subjectId) {
-		Optional<Course> optionalCourse = courseRepository.findById(courseId);
-		Optional<Subject> optionalSubject = subjectRepository.findById(subjectId);
-		
-		if(optionalCourse.isPresent() && optionalSubject.isPresent()) {
-			Course course = optionalCourse.get();
-			Subject subject = optionalSubject.get();
-			
-			course.getSubjects().add(subject);
-			subject.getCourses().add(course);
-			
-			courseRepository.save(course);
-			subjectRepository.save(subject);
-			return course;
-			
-		}
-		return null;
-	}
-	
-	//remove subject from the course
-	public Course removeSubjectFromCourse(int courseId, int subjectId) {
-		Optional<Course> optionalCourse = courseRepository.findById(courseId);
-		Optional<Subject> optionalSubject = subjectRepository.findById(subjectId);
-		
-		if (optionalCourse.isPresent() && optionalSubject.isPresent()) {
-			Course course = optionalCourse.get();
-			Subject subject = optionalSubject.get();
-			
-			course.getSubjects().remove(subject);
-			subject.getCourses().remove(course);
-			
-			courseRepository.save(course);
-			subjectRepository.save(subject);
-			
-			return course;
-		}
-		
-		return null;
+		return "Course Deleted Successfully";
 	}
 }

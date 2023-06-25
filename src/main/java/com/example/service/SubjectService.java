@@ -6,14 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dao.CourseRepository;
 import com.example.dao.SubjectRepository;
+import com.example.model.Course;
 import com.example.model.Subject;
 
 @Service
 public class SubjectService {
 	@Autowired
 	private SubjectRepository subjectRepository;
-
+	
+	@Autowired
+	private CourseRepository courseRepository;
+	
 	public Subject createSubject(Subject subject) {
 		return subjectRepository.save(subject);
 	}
@@ -23,6 +28,10 @@ public class SubjectService {
 	}
 	
 	public List<Subject> getAllSubject(){
+		return subjectRepository.findAll();
+	}
+	
+	public List<Subject> getAllSubjectByCourseid(int subjectid){
 		return subjectRepository.findAll();
 	}
 	
@@ -51,13 +60,13 @@ public class SubjectService {
 		return oldSubject;
 	}
 	
-	public Subject removeSubjectFromCourse(int subjectId, int courseId) {
-		Optional<Subject> optionalSubject = subjectRepository.findById(subjectId);
-		if (optionalSubject.isPresent()) {
-			Subject subject = optionalSubject.get();
-			subject.getCourses().removeIf(course -> course.getId() == courseId);
-			return subjectRepository.save(subject);
-		}
-		return null;
-	}
+	 public void enrollSubjectToCourse(int courseId, Subject subject) {
+	        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+	        if (optionalCourse.isPresent() && optionalCourse.isPresent()) {
+	            Course course = optionalCourse.get();
+	            course.addSubject(subject);;
+	            courseRepository.save(course);
+	        }
+	 }
+	
 }
