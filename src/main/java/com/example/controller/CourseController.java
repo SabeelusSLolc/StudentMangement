@@ -55,17 +55,4 @@ public class CourseController {
 	public String deleteCourse(@PathVariable int id) {
 		return courseService.deleteCourseById(id);
 	}
-//	
-//	//assigning subjects to the course
-//	@PostMapping("{courseId}/subjects/{subjectId}")
-//	public Course assignSubjectToCourse(@PathVariable int courseId, @PathVariable int subjectId) {
-//		return courseService.assignSubjectToCourse(courseId, subjectId);
-//		
-//	}
-//	
-//	@DeleteMapping("/{courseId}/subjects/{subjectId}")
-//	public Course removeSubjectFromCourse(@PathVariable int courseId, @PathVariable int subjectId) {
-//		return courseService.removeSubjectFromCourse(courseId, subjectId);
-//	}
-
 }

@@ -62,11 +62,22 @@ public class SubjectService {
 	
 	 public void enrollSubjectToCourse(int courseId, Subject subject) {
 	        Optional<Course> optionalCourse = courseRepository.findById(courseId);
-	        if (optionalCourse.isPresent() && optionalCourse.isPresent()) {
+	        if (optionalCourse.isPresent() ) {
 	            Course course = optionalCourse.get();
-	            course.addSubject(subject);;
+	            course.addSubject(subject);
 	            courseRepository.save(course);
 	        }
 	 }
+	 
+	 public void removeSubjectFromCourse(int courseId, int subjectId) {
+			Optional<Course> optionalCourse = courseRepository.findById(courseId);
+			if (optionalCourse.isPresent()) {
+				Course course = optionalCourse.get();
+				course.removeSubject(subjectId);
+				courseRepository.save(course);
+			} else {
+				System.out.print("Course not found with ID: " + courseId);
+			}
+		}
 	
 }

@@ -1,7 +1,6 @@
 package com.example.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -33,17 +34,30 @@ public class Subject {
 	private Set<Course> courses = new HashSet<>();
 	//if you add anything here row will be inserted by Hibernate in the join table
 	
-	@ManyToMany(mappedBy = "subjects")
-	private List<Lecturer> lecturers;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="Subject_Lecturer",
+	joinColumns = @JoinColumn(name = "subject_id"), //owning side
+	inverseJoinColumns = @JoinColumn(name = "lecturer_id"))
 	
-	public Set<Course> getCourses() {
-		return courses;
-	}
-	public List<Lecturer> getLecturers() {
+	private Set<Lecturer> lecturers = new HashSet<>();	
+	
+	
+	public Set<Lecturer> getLecturers() {
 		return lecturers;
 	}
-	public void setLecturers(List<Lecturer> lecturers) {
-		this.lecturers = lecturers;
+	public void addLecturer(Lecturer lecturer) {
+		this.lecturers.add(lecturer);
+		lecturer.getSubjects().add(this);
+	}
+	public void removeLecturer(int lecturerId) {
+		Lecturer lecturer = this.lecturers.stream().filter(s -> s.getId() == lecturerId).findFirst().orElse(null);
+		if(lecturer!= null) {
+			this.lecturers.remove(lecturer);
+			lecturer.getSubjects().remove(this);
+		}
+	}
+	public Set<Course> getCourses() {
+		return courses;
 	}
 	public void setCourses(Set<Course> courses) {
 		this.courses = courses;

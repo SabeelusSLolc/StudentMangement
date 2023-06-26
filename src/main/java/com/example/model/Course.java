@@ -42,6 +42,15 @@ public class Course {
 			this.subjects.add(subject);
 			subject.getCourses().add(this);
 		}
+		
+		public void removeSubject(long subjectId) {
+		    Subject subject = this.subjects.stream().filter(s -> s.getId() == subjectId).findFirst().orElse(null);
+		    if (subject != null) {
+		      this.subjects.remove(subject);
+		      subject.getCourses().remove(this);
+		    }
+		}
+
 		public int getId() {
 			return id;
 		}

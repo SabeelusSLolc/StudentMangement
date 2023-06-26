@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,5 +60,11 @@ public class SubjectController {
         subjectService.enrollSubjectToCourse(courseId, subject);
         return ResponseEntity.ok("Enrollment successful");
     }
+	
+	@DeleteMapping("/{courseId}/subjects/{subjectId}")
+	public ResponseEntity<HttpStatus> removeSubjectFromCourse(@PathVariable int courseId, @PathVariable int subjectId) {
+		subjectService.removeSubjectFromCourse(courseId, subjectId);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 	
 }
