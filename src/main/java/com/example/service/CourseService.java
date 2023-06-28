@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.CourseRepository;
+import com.example.dao.StudentRepository;
 import com.example.model.Course;
+import com.example.model.Student;
 
 @Service
 public class CourseService {
@@ -15,9 +17,11 @@ public class CourseService {
 	@Autowired
 	private CourseRepository courseRepository;
 	
+	@Autowired
+	private StudentRepository studentRepository;
+	
 	public Course CreateCourse(Course course) {
 		return courseRepository.save(course);
-		
 	}
 	
 	public List<Course> createCourses(List<Course> Courses){
@@ -57,4 +61,18 @@ public class CourseService {
 		courseRepository.deleteById(id);
 		return "Course Deleted Successfully";
 	}
+	
+	public void enrollStudentToCourse(int courseId, int studentId) {
+        Course course = courseRepository.findById(courseId).orElse(null);
+        Student student = studentRepository.findById(studentId).orElse(null);
+        course.enrollStudent(student);
+        courseRepository.save(course);
+    }
+	
+	public void unenrollStudentFromCourse(int courseId, int studentId) {
+        Course course = courseRepository.findById(courseId).orElse(null);
+        Student student = studentRepository.findById(studentId).orElse(null);
+        course.unenrollStudent(student);;
+        courseRepository.save(course);
+    }
 }

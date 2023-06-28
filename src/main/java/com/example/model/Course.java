@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Course {
@@ -34,10 +35,48 @@ public class Course {
 	    		inverseJoinColumns = @JoinColumn(name = "subject_id")) //the non-owning (inverse side)
 	    @JsonProperty("subjects")
 	    private Set<Subject> subjects = new HashSet<>();
+	    
+	    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+	    private Set<Enrollment> enrollments = new HashSet<>();
 	    //nothing will be modified in the database in the course_subject
+	    
+	    
 	    public Set<Subject> getSubjects() {
 			return subjects;
 		}
+	    
+		public Set<Enrollment> getEnrollments() {
+			return enrollments;
+		}
+		//enrollStudent
+		public void enrollStudent(Student student) {
+		    // Check if the student is already enrolled in the course
+		    for (Enrollment enrollment : enrollments) {
+		        if (enrollment.getStudent().equals(student)) {
+		            return; // Student is already enrolled, exit the method
+		        }
+		    }
+
+		    // Create the enrollment and add it to the sets
+		    Enrollment enrollment = new Enrollment(this, student);
+		    enrollments.add(enrollment);
+		    student.getEnrollments().add(enrollment);
+		}
+
+		public void unenrollStudent(Student student) {
+	        Enrollment enrollmentToRemove = null;
+	        for (Enrollment enrollment : enrollments) {
+	            if (enrollment.getCourse().equals(this) && enrollment.getStudent().equals(student)) {
+	                enrollmentToRemove = enrollment;
+	                break;
+	            }
+	        }
+	        if (enrollmentToRemove != null) {
+	            enrollments.remove(enrollmentToRemove);
+	            student.getEnrollments().remove(enrollmentToRemove);
+	        }
+	    }
+		
 		public void addSubject(Subject subject) {
 			this.subjects.add(subject);
 			subject.getCourses().add(this);

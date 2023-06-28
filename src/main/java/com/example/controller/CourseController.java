@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,4 +56,18 @@ public class CourseController {
 	public String deleteCourse(@PathVariable int id) {
 		return courseService.deleteCourseById(id);
 	}
+	
+	//enroll 
+	@PostMapping("/{courseId}/enroll/{studentId}")
+    public ResponseEntity<String> enrollStudentToCourse(@PathVariable int courseId,@PathVariable int studentId) {
+        courseService.enrollStudentToCourse(courseId, studentId);
+        return ResponseEntity.ok("Student enrolled in the course");
+    }
+	
+	//unenroll 
+	@DeleteMapping("/{courseId}/unenroll/{studentId}")
+	    public ResponseEntity<String> unenrollStudentFromCourse( @PathVariable int courseId, @PathVariable int studentId ) {
+	        courseService.unenrollStudentFromCourse(courseId, studentId);
+	        return ResponseEntity.ok("Student unenrolled from the course");
+	    }
 }

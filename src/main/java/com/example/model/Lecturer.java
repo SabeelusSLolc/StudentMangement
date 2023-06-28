@@ -14,11 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-
 @Entity
-@Table(name = "Lecture", uniqueConstraints = @UniqueConstraint(columnNames="nic"))
 public class Lecturer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +24,7 @@ public class Lecturer {
     private String address;
     private String phoneNumber;
     private String email;
+    @Column(unique = true)
     private String nic;
     private String gender;
     private String dateOfBirth;

@@ -38,7 +38,7 @@ public class SubjectController {
 		return subjectService.getAllSubject();
 	}
 	
-	@PutMapping("/Update")
+	@PutMapping("/update")
 	public Subject update(@RequestBody Subject subject) {
 		return subjectService.editSubjectById(subject);
 	}
@@ -54,9 +54,7 @@ public class SubjectController {
 	}
 	
 	@PostMapping("/courses/{courseId}/subjects")
-    public ResponseEntity<String> enrollSubjectToCourse(
-            @PathVariable("courseId") int courseId,
-            @RequestBody Subject subject) {
+    public ResponseEntity<String> enrollSubjectToCourse(@PathVariable("courseId") int courseId,@RequestBody Subject subject) {
         subjectService.enrollSubjectToCourse(courseId, subject);
         return ResponseEntity.ok("Enrollment successful");
     }

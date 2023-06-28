@@ -1,12 +1,16 @@
 package com.example.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -46,7 +50,14 @@ public class Student {
     
     @Column(nullable = true, updatable = false)
     private LocalDate registrationDate;
-
+    
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Enrollment> enrollments = new HashSet<>();
+    
+    public Set<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+    
 	public int getId() {
 		return Id;
 	}

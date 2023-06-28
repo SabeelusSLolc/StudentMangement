@@ -70,7 +70,6 @@ public class LecturerController {
 	public ResponseEntity<HttpStatus> removeLecturerFromSubject(@PathVariable int subjectId,@PathVariable int lecturerId){
 		lecturerService.removelecturerFromSubject(subjectId, lecturerId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		
 	}
 	
 	

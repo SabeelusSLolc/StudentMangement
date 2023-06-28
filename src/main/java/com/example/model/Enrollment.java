@@ -9,7 +9,6 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Enrollment {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -24,6 +23,14 @@ public class Enrollment {
 
 	public int getId() {
 		return id;
+	}
+	
+	public Enrollment() {
+		
+	}
+	public Enrollment(Course course,Student student) {
+		this.course = course;
+		this.student = student;
 	}
 
 	public void setId(int id) {
