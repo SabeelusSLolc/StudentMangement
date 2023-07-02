@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -52,6 +54,6 @@ public class Enrollment {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
+
 	
 }

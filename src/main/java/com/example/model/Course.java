@@ -27,7 +27,6 @@ public class Course {
 	    private int duration;
 	    private String startDate;
 	    private String endDate;
-	    
 	    @ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(
 	    		name = "Course_Subject",
@@ -132,6 +131,10 @@ public class Course {
 		public void setEndDate(String endDate) {
 			this.endDate = endDate;
 		}
+		
+		public void setSubjects(Set<Subject> subjects) {
+	        this.subjects = subjects;
+	    }
 
 	
 }

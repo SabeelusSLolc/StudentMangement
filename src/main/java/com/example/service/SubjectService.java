@@ -31,7 +31,7 @@ public class SubjectService {
 		return subjectRepository.findAll();
 	}
 	
-	public List<Subject> getAllSubjectByCourseid(int subjectid){
+	public List<Subject> getAllSubjectByCourseid(int courseId){
 		return subjectRepository.findAll();
 	}
 	

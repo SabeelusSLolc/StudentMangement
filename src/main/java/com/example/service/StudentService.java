@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dao.CourseRepository;
 import com.example.dao.StudentRepository;
+import com.example.model.Course;
+import com.example.model.Enrollment;
 import com.example.model.Student;
 
 @Service
@@ -14,6 +17,9 @@ public class StudentService {
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 	
 	public Student createStudent(Student student) {
 		return studentRepository.save(student);
@@ -55,4 +61,26 @@ public class StudentService {
 	public List<Student> searchStudentsByFirstName(String firstName) {
 		return studentRepository.findByFirstName(firstName);
 	}
+	
+//	public Student getStudentDetails(int studentId) {
+//	    Optional<Student> optionalStudent = studentRepository.findById(studentId);
+//	    if (optionalStudent.isPresent()) {
+//	        Student student = optionalStudent.get();
+//	        Set<Enrollment> enrollments = student.getEnrollments();
+//	        for (Enrollment enrollment : enrollments) {
+//	            Course course = enrollment.getCourse();
+//	            Set<Subject> subjects = course.getSubjects();
+//	            course.setSubjects(subjects); // Set the subjects for the course
+//	        }
+//	        return student;
+//	    }
+//	    return null; // Handle the case when student is not found
+//	}
+	
+	
+	public Course getCourseDetailsByStudentId(int studentid){
+		return courseRepository.findCourseById(studentid);
+	}
+ 
+	
 }
