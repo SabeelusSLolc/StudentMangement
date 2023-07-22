@@ -45,10 +45,6 @@ public class LecturerController {
 		return lecturerService.deleteLecturer(id);
 	}
 	
-//	@GetMapping("/getAllLecturers")
-//	public List<Lecturer> getAllLecturers() {
-//		return lecturerService.getAllLecturers();
-//	}
 	
 	@GetMapping("/lecturers/{lecturerId}/subjects")
 	public List<Subject> getAllSubjectsByLecturerId(@PathVariable int lecturerId) {

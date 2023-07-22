@@ -10,9 +10,7 @@ import com.example.model.Enrollment;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
-	
-	//List<Student> findByStudentsId(String studentid);
-	
 	 
-    Course findCourseById(int studentid);
+   // Course findCourseByStudentId(int studentid);
+    
 }

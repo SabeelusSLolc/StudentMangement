@@ -3,7 +3,6 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dao.StudentRepository;
-import com.example.model.Course;
-import com.example.model.Enrollment;
 import com.example.model.Student;
 import com.example.service.StudentService;
 
@@ -55,14 +51,10 @@ public class StudentController {
 		return studentService.searchStudentsByFirstName(firstName);
 	}
 	
-//	@GetMapping("/{id}/details")
-//    public Student getStudentDetails(@PathVariable int id) {
-//        return studentService.getStudentDetails(id);
-//    }
+//	@GetMapping("/{studentid}/course")
+//	public Course getCourseDetailsByCourseId(@PathVariable int studentid){
+//		return studentService.getCourseDetailsByStudentId(studentid);
+//	}
 	
-	@GetMapping("/{studentid}/course")
-	public Course getCourseDetailsByCourseId(@PathVariable int studentid){
-		return studentService.getCourseDetailsByStudentId(studentid);
-	}
 }
 

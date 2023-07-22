@@ -78,9 +78,9 @@ public class StudentService {
 //	}
 	
 	
-	public Course getCourseDetailsByStudentId(int studentid){
-		return courseRepository.findCourseById(studentid);
-	}
+//	public Course getCourseDetailsByStudentId(int studentid){
+//		return courseRepository.findCourseByStudentId(studentid);
+//	}
  
 	
 }

@@ -72,7 +72,7 @@ public class CourseService {
 	public void unenrollStudentFromCourse(int courseId, int studentId) {
         Course course = courseRepository.findById(courseId).orElse(null);
         Student student = studentRepository.findById(studentId).orElse(null);
-        course.unenrollStudent(student);;
+        course.unenrollStudent(student);
         courseRepository.save(course);
     }
 }
