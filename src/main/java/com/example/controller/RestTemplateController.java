@@ -1,16 +1,25 @@
 package com.example.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import com.example.service.RestTemplateService;
 
 @RestController
 @RequestMapping("/RestTemplate")
 public class RestTemplateController {
 	
-	RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private RestTemplateService restTemplateService;
 	
-	public ResponseEntity<String> allBooks
+	@GetMapping("/getAllBooks")
+	public ResponseEntity<String> allBooks(){
+		return restTemplateService.allBooks();
+	}
+	
+	
+	
 }

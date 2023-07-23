@@ -6,10 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.dao.CourseRepository;
 import com.example.dao.StudentRepository;
-import com.example.model.Course;
-import com.example.model.Enrollment;
 import com.example.model.Student;
 
 @Service
@@ -17,9 +14,6 @@ public class StudentService {
 	
 	@Autowired
 	private StudentRepository studentRepository;
-	
-	@Autowired
-	private CourseRepository courseRepository;
 	
 	public Student createStudent(Student student) {
 		return studentRepository.save(student);
