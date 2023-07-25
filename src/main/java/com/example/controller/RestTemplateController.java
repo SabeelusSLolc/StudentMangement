@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +17,15 @@ public class RestTemplateController {
 	@Autowired
 	private RestTemplateService restTemplateService;
 	
-	@GetMapping("/getAllBooks")
-	public ResponseEntity<String> allBooks(){
-		return restTemplateService.allBooks();
+//	@GetMapping("/getAllBooks")
+//	public ResponseEntity<String> allBooks(){
+//		return restTemplateService.allBooks();
+//	}
+	
+	
+	@GetMapping("/getBooks")
+	public List<Object> getAllBooks(){
+		return restTemplateService.getBooks();
+		
 	}
-	
-	
-	
 }
