@@ -28,4 +28,9 @@ public class RestTemplateController {
 		return restTemplateService.getBooks();
 		
 	}
+	
+	@GetMapping("/getSingleBook")
+	public List<Object> getSingleBook(){
+		return restTemplateService.getSingleBook();
+	}
 }

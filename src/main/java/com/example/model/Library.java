@@ -26,6 +26,8 @@ public class Library {
     
     @ElementCollection
     private List<String> authors = new ArrayList<>();
+    
+    //private List<Subject> data; 
 
     @Column(nullable = false)
     private String coverImageUrl;
