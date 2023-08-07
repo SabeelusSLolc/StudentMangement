@@ -75,4 +75,5 @@ public class CourseService {
         course.unenrollStudent(student);
         courseRepository.save(course);
     }
+
 }

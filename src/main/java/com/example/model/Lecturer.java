@@ -30,7 +30,7 @@ public class Lecturer {
     private String dateOfBirth;
     private String degree;
     @Column(updatable = false)
-    private LocalDate registrationDate;
+    private LocalDate registrationDate = LocalDate.now();
     
     @ManyToMany(
     			fetch = FetchType.LAZY,

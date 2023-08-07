@@ -51,7 +51,7 @@ public class Student {
     private String schoolOrUniversity;
     
     @Column(nullable = true, updatable = false)
-    private LocalDate registrationDate;
+    private LocalDate registrationDate = LocalDate.now();
     
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
