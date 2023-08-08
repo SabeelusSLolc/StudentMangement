@@ -83,6 +83,4 @@ public class LecturerService {
 			System.out.println("Error");
 		}
 	}
-	
-	
 }

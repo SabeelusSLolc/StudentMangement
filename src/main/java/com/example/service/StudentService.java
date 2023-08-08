@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.StudentRepository;
 import com.example.model.Student;
+import com.example.model.StudentDto;
 
 @Service
 public class StudentService {
@@ -56,25 +57,12 @@ public class StudentService {
 		return studentRepository.findByFirstName(firstName);
 	}
 	
-//	public Student getStudentDetails(int studentId) {
-//	    Optional<Student> optionalStudent = studentRepository.findById(studentId);
-//	    if (optionalStudent.isPresent()) {
-//	        Student student = optionalStudent.get();
-//	        Set<Enrollment> enrollments = student.getEnrollments();
-//	        for (Enrollment enrollment : enrollments) {
-//	            Course course = enrollment.getCourse();
-//	            Set<Subject> subjects = course.getSubjects();
-//	            course.setSubjects(subjects); // Set the subjects for the course
-//	        }
-//	        return student;
-//	    }
-//	    return null; // Handle the case when student is not found
-//	}
-	
-	
-//	public Course getCourseDetailsByStudentId(int studentid){
-//		return courseRepository.findCourseByStudentId(studentid);
-//	}
- 
+	public StudentDto convertToDto(Student student) {
+		StudentDto dto = new StudentDto();
+		dto.setFullname(student.getFirstName() + " " + student.getLastName());
+		dto.setAddress(student.getAddress());
+		dto.setPhone_number(student.getPhoneNumber());
+		return dto;
+	}
 	
 }

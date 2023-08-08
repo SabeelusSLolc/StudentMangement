@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Student;
+import com.example.model.StudentDto;
 import com.example.service.StudentService;
 
 @RestController
@@ -56,5 +57,9 @@ public class StudentController {
 //		return studentService.getCourseDetailsByStudentId(studentid);
 //	}
 	
+	@GetMapping("/studentDto/{studentId}")
+	public StudentDto convertedDto(@PathVariable Student studentId) {
+		return studentService.convertToDto(studentId);
+	}
 }
 
