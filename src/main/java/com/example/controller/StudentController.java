@@ -52,14 +52,11 @@ public class StudentController {
 		return studentService.searchStudentsByFirstName(firstName);
 	}
 	
-//	@GetMapping("/{studentid}/course")
-//	public Course getCourseDetailsByCourseId(@PathVariable int studentid){
-//		return studentService.getCourseDetailsByStudentId(studentid);
-//	}
-	
+	//studentDto getting limited details of student 
 	@GetMapping("/studentDto/{studentId}")
 	public StudentDto convertedDto(@PathVariable Student studentId) {
 		return studentService.convertToDto(studentId);
 	}
+
 }
 
